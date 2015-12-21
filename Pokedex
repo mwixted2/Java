@@ -1,0 +1,87 @@
+import java.util.Arrays;
+public class Pokedex {
+
+	public Pokemon[] pokemonArray;
+	public int countPokemon = 0;
+	
+
+	public Pokedex(int size){
+		pokemonArray = new Pokemon [size];
+		
+		//for(int i = 0; i < pokemonArray.length; i++){
+			//pokemonArray[i] = new Pokemon("empty", 0, 0, 0);
+	}
+	public void listPokemon(){
+		if(countPokemon == 0){
+			System.out.println("Your Pokedex is currently empty!");
+			
+		}else{
+		for(int i = 0; i < countPokemon; i++){
+			System.out.println((i+1) + "." + pokemonArray[i].species + "");
+		}
+		}
+		}
+	
+	public void addPokemon(Pokemon pkm){
+		if(pokemonArray.length == countPokemon){
+			System.out.println("Your Pokedex is already holding the max amount!");
+		}else{
+		for(int i = 0; i < countPokemon; i++){
+			if((pokemonArray[i].getSpecies()).equals(pkm.getSpecies())){
+				System.out.println("Your Pokedex is already storing that Pokemon!");
+				
+			}
+		}
+			pokemonArray[countPokemon] = pkm;
+			
+		}			
+		
+		countPokemon++;
+	}
+	
+	public void checkStats(String pkm_nm){
+		
+		boolean name_found = false;
+		for(int i = 0; i < countPokemon; i++){
+			
+			if(pokemonArray[i].getSpecies().equals(pkm_nm)){
+				name_found = true;
+			System.out.println("\nThe stats for " + pkm_nm + " are: ");
+			System.out.println("Attack: " + pokemonArray[i].getAttack());
+			System.out.println("Defense: " + pokemonArray[i].getDefense());
+			System.out.println("Speed: " + pokemonArray[i].getSpeed());
+		}
+		}
+		if(!name_found){
+			System.out.println("\nThe Pokemon could not be found!");
+		}
+		
+		}
+		 
+		
+		
+	
+	
+	
+	
+	
+	
+	public void sortPokemon(){
+		String templ = "";
+		int temp2 = 0;
+		for(int i = 0; i< countPokemon; i++){
+			for(int k = i+1; k < countPokemon; k++){
+				if(pokemonArray[i].getSpecies().compareTo(pokemonArray[k].getSpecies())> 0){
+					templ = pokemonArray[i].getSpecies();
+					pokemonArray[i].species = pokemonArray[k].getSpecies();
+					pokemonArray[k].species = templ;
+					temp2 = pokemonArray[i].getAttack();
+					pokemonArray[i].setAttack(pokemonArray[k].getAttack());
+					pokemonArray[k].setAttack(temp2);
+					
+				}
+			}
+			
+		}
+	}
+}
