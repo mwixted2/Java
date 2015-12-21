@@ -1,0 +1,62 @@
+import java.util.Scanner;
+public class Project4 {
+	public static void main(String [] args){
+		Scanner console = new Scanner(System.in);
+		String species = "";
+		int attack = 0;
+		int defense = 0;
+		int speed = 0;
+		String pkm_nm = "";
+		
+		System.out.print("Welcome to your new PokeDex! ");
+		System.out.print("\nHow many Pokemon are in your region?: ");
+		int pokemon = console.nextInt();
+		Pokedex pokemonArray = new Pokedex (pokemon);
+		Pokemon new_pokemon = new Pokemon(species, attack, defense, speed);
+		System.out.println("\nYour new Pokedex can hold " + pokemon + " pokemon. Let's start using it! ");
+		
+		
+		boolean pokemonMain = true;
+		while(pokemonMain){
+			System.out.println("\n1. List Pokemon ");
+			System.out.println("2. Add Pokemon ");
+			System.out.println("3. Check a Pokemon's Stats ");
+			System.out.println("4. Sort Pokemon ");
+			System.out.println("5. Exit ");
+			System.out.print("\nWhat would you like to do? ");
+			int firstchoice = console.nextInt();
+			
+			
+			if(firstchoice < 1 || firstchoice > 5){
+				System.out.println("\nThat's not a valid input choice. Try again! ");
+			}
+			if(firstchoice == 1){
+				pokemonArray.listPokemon();
+			}
+			if(firstchoice == 2){
+				System.out.print("\nPlease enter the Pokemon's name: ");
+				species = console.next();
+					attack = ((species.length() * 4) + 2);
+					defense = ((species.length()* 2) + 7);
+					speed = ((species.length()*3 ) + 5);
+				Pokemon check_stats = new Pokemon(species, attack, defense, speed);
+				pokemonArray.addPokemon(new Pokemon(species, attack, defense, speed));
+			}
+			if(firstchoice == 3){
+				System.out.print("\nPlease enter the Pokemon of interest: ");
+				pkm_nm = console.next();
+				pokemonArray.checkStats(pkm_nm);
+				
+			}
+			if(firstchoice == 4){
+				pokemonArray.sortPokemon();
+			}
+			if(firstchoice == 5){
+				pokemonMain = false;
+			}
+		}
+		
+	}
+
+}
+
