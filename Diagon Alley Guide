@@ -1,0 +1,581 @@
+import java.util.Scanner;
+public class DiagonAlleyGuide {
+	public static int cost_broom = 493;
+	public static int cost_robes = 348;
+	public static int cost_wand = 203;
+	public static int cost_bookofspells = 145;
+	public static int cost_historyofmagic = 99;
+	public static int cost_draftsandpotions = 27;
+	public static int cost_cauldron = 290;
+	public static int exchangeGalleons(double USD){
+		int total_knuts = (int)(USD /0.10);
+		int knuts = ((total_knuts % 493) % 29);
+		int sickles = ((total_knuts - knuts)/ 29) % 17;
+		int galleons = (int)((total_knuts - sickles / 17) % 4.93);
+		return (int)((USD*10)/ 493);
+	}//method for exchanging galleons
+	public static int exchangeSickles(double USD){
+		int total_knuts = (int)(USD /0.10);
+		int knuts = ((total_knuts % 493) % 29);
+		int sickles = ((total_knuts - knuts)/ 29) % 17;
+		return sickles;
+	}//method for exchanging sickles
+	public static int exchangeKnuts(double USD){
+		int total_knuts = (int)(USD/ 0.10);
+		int knuts = ((total_knuts % 493) % 29);
+		return knuts;
+	}//method for exchanging knuts
+	public static void balance(int galleon, int sickle, int knut){
+		if(sickle < 0){
+			galleon = galleon -1;
+			sickle = sickle + 17;
+		}
+		System.out.println("\nYou have " + galleon + " Galleons " + sickle + " Sickles " + knut + " Knuts ");
+	}
+	public static boolean enoughMoney(int galleon, int sickle, int knut, int cost){
+		boolean enoughmoney = false;
+		double total_knuts = (galleon*17*29) + (sickle*29) + knut;
+		if(total_knuts >= cost){
+			enoughmoney = true;
+		}
+		if(total_knuts < cost){
+			enoughmoney = false;
+		}
+		return enoughmoney;
+	}
+
+	
+	
+		
+	
+	public static void main(String[] args) {
+		Scanner console = new Scanner(System.in);
+		
+		boolean hasBroom = true;
+		boolean hasRobes = true;
+		boolean hasWand = true;
+		boolean hasBookofSpells = true;
+		boolean hasHistoryofMagic = true;
+		boolean hasDraftsandPotions = true;
+		boolean hasCauldron = true;
+		boolean hasNothing = true;
+		boolean main = true;
+		int galleon=0;
+		int sickle = 0;
+		int knut = 0;
+		int cost = 0;
+		System.out.println("Welcome to Diagon Alley! ");
+		while(main){
+		
+		
+		System.out.println("\nMain Menu: ");
+		System.out.println("1. Gringotts Bank ");
+		System.out.println("2. List of Supplies ");
+		System.out.println("3. Shoppes ");
+		System.out.println("4. Leave ");
+		
+		
+		System.out.print("\nSelection: ");
+		int first_selection = console.nextInt();
+		
+		boolean firstselection = true;
+		while(firstselection){
+		
+		
+		
+		if(first_selection > 4 || first_selection < 1){
+			System.out.println("\nInvalid entry!");
+			firstselection = false;
+		}// first selection invalid entry
+		
+		if(first_selection == 1){
+			
+			System.out.println("\nGringotts Bank\n" +
+								"1. Exchange Money");
+			System.out.println("2. Check Balance");
+			System.out.println("3. Exit");
+			
+			System.out.print("\nSelection: ");
+			int bank_selection = console.nextInt();
+			
+			
+			if(bank_selection > 3 || bank_selection < 1){
+				System.out.println("\nInvalid entry!");
+				
+				
+
+			}//bank selection invalid entry
+		
+
+			if(bank_selection == 1){
+				
+				System.out.println("\nHow much would you like to exchange?");
+				System.out.print("USD: ");
+				double USD = console.nextDouble();
+				galleon+=exchangeGalleons(USD);
+				sickle+=exchangeSickles(USD);
+				knut+=exchangeKnuts(USD);
+				
+				
+				if(USD < 0){
+					System.out.println("Transaction failed! ");
+					System.out.println("Input cannot be negative! ");
+				}
+				
+				
+			
+				//here
+				else{
+					//System.out.print(exchangeGalleons(USD));
+					//System.out.print(exchangeSickles(USD));
+					//System.out.print(exchangeKnuts(USD));
+					System.out.println("\nTransaction Complete!");
+				
+				
+				// gringotts bank exchange money selection
+				}//else gringotts transaction complete
+			}//bank selection statement
+			
+			
+			
+			
+			
+				if (bank_selection == 2){
+					System.out.print("");
+				balance(galleon, sickle, knut);
+				//here
+				}//gringotts check balance selection
+			
+		
+			if(bank_selection == 3){
+				firstselection = false;
+				
+				}
+		
+		}//if statement loop false
+			
+		//if statement gringrotts bank
+
+		
+		
+		
+		//System.out.println(first_selection);
+		if(first_selection == 2){
+			
+			System.out.println("\nInventory:");
+			if(hasBroom == false){
+				System.out.println("Broom");
+			}
+			if(hasRobes == false){
+				System.out.println("School robes");
+			}
+			if(hasWand == false){
+				System.out.println("Wand");
+			}
+			if(hasBookofSpells == false){
+				System.out.println("The Standard Book of Spells");
+			}
+			if(hasHistoryofMagic == false){
+				System.out.println("A History of Magic");
+			}
+			if(hasDraftsandPotions == false){
+				System.out.println("Magical Drafts and Potions");
+			}
+			if(hasCauldron == false){
+				System.out.println("Cauldron");
+			}
+			//inventory list
+			
+			System.out.println("\nNeed:");
+			if(hasBroom == true){
+				System.out.println("Broom");
+			}
+			if(hasRobes == true){
+				System.out.println("School robes");
+			}
+			if(hasWand == true){
+				System.out.println("Wand");
+			}
+			if(hasBookofSpells == true){
+				System.out.println("The Standard Book of Spells");
+			}
+			if(hasHistoryofMagic == true){
+				System.out.println("A History of Magic");
+			}
+			if(hasDraftsandPotions == true){
+				System.out.println("Magical Drafts and Potions");
+			}
+			if(hasCauldron == true){
+				System.out.println("Cauldron");
+			}
+			firstselection = false;
+			
+			boolean list = true;
+		}//if statement list of supplies
+		
+		
+		
+		
+		
+		if(first_selection == 3){
+			System.out.println("\nShoppes");
+			System.out.println("1. Broomstix");
+			System.out.println("2. Second-Hand Robes");
+			System.out.println("3. Olivanders");
+			System.out.println("4. Flourish and Blotts");
+			System.out.println("5. Potage's Cauldron Shop");
+			System.out.println("6. Exit");
+			
+			System.out.print("\nSelection: ");
+			int shop_selection = console.nextInt();
+		
+				if(shop_selection > 6 || shop_selection < 1){
+					System.out.println("\nInvalid entry!");
+				}//shop selection invalid entry
+				if(shop_selection == 1){
+					boolean broomstix = true;
+					while(broomstix){
+					System.out.println("\nBroomstix ");
+					System.out.println("1. Buy Broom for 1 Galleon ");
+					System.out.println("2. Exit ");
+					
+					System.out.print("\nSelection: ");
+					int broomstix_selection = console.nextInt();
+					//here
+					if(broomstix_selection > 2 || broomstix_selection < 1){
+						System.out.println("\nInvalid entry! ");
+					}//broomstix selection for invalid entry
+					
+					if(broomstix_selection == 1 && hasBroom == true && 
+							enoughMoney(galleon, sickle, knut, cost_broom) == true){
+						hasBroom = false;
+						hasNothing = false;
+						
+						galleon = galleon -1;
+							System.out.println("\nTransaction successful! ");
+					}//end broomstix can buy
+					else if(broomstix_selection == 1 && hasBroom == false){
+						System.out.println("\nTransaction failed! ");
+						System.out.println("You already have this! ");
+						
+					}//end broomstix cannot buy already have
+					if(broomstix_selection == 1 && hasBroom == true && enoughMoney(galleon, sickle, knut, cost_broom)== false){
+						System.out.println("\nTransaction failed! ");
+						System.out.println("You do not have enough money! ");
+					}//end broomstix
+					if(broomstix_selection == 2){
+						broomstix = false;
+					}
+					}//while loop broomstix
+						//here
+			//broomstix shop selection
+				}
+		
+				if(shop_selection == 2){
+					boolean secondhandrobes = true;
+					while(secondhandrobes){
+					System.out.println("\nSecond-Hand Robes");
+					System.out.println("1. Buy School robes for 12 Sickles");
+					System.out.println("2. Exit");
+					
+					System.out.print("\nSelection: ");
+					int robes_selection = console.nextInt();
+					
+					if(robes_selection > 2 || robes_selection < 1){
+						System.out.println("\nInvalid entry!");
+						secondhandrobes = false;
+					}//secondhand robes selection for invalid entry
+					if(robes_selection == 1 && hasRobes == true && enoughMoney(galleon, sickle, knut, cost_robes) == true){
+						hasRobes = false;
+						hasNothing = false;
+						sickle = sickle - 12;
+						if(sickle < 0){
+							galleon = galleon -1;
+							sickle = sickle + 17;
+						}
+						System.out.println("\nTransaction successful! ");
+						//here
+					}
+					else if(robes_selection == 1 && hasRobes == false){
+						System.out.println("\nTransaction failed! ");
+						System.out.println("You already have this! ");
+					}
+					if(robes_selection == 1 && enoughMoney(galleon, sickle, knut, cost_robes) == false){
+						System.out.println("\nTransaction failed! ");
+						System.out.println("You do not have enough money! ");
+					}
+					if(robes_selection == 2){
+						secondhandrobes = false;
+					}
+				}//while secondhandrobes
+				}//secondhand robes selection
+				
+				if(shop_selection == 3){
+					boolean olivanders = true;
+					while(olivanders){
+				
+					System.out.println("\nOlivanders");
+					System.out.println("1. Buy Wand for 7 Sickles");
+					System.out.println("2. Exit");
+					
+					System.out.print("\nSelection: ");
+					int wand_selection = console.nextInt();
+					
+					if(wand_selection > 2 || wand_selection < 1){
+						System.out.println("\nInvalid entry!");
+					}//wand selection for invalid entry
+					if(wand_selection == 1 && hasWand == true && enoughMoney(galleon, sickle, knut, cost_wand)== true){
+						System.out.println("\nTransaction successful! ");
+						hasWand = false;
+						hasNothing = false;
+						sickle = sickle -7;
+						if(sickle < 0){
+							galleon = galleon -1;
+							sickle = sickle + 17;
+						}
+						//here
+					}//wand selection 
+					else if(wand_selection == 1 && hasWand == false){
+						System.out.println("\nTransaction failed! ");
+						System.out.println("You already have this! ");
+					}//wand selection transaction failed
+					if(wand_selection == 1 && enoughMoney(galleon, sickle, knut, cost_wand) == false){
+						System.out.println("\nTransaction failed! ");
+						System.out.println("You do not have enough money! ");
+					}
+					if(wand_selection == 2){
+						olivanders = false;
+					}//end loop olivanders
+					}//while loop olivanders
+			}//wand selection
+				//tell TA that Olivanders is spelled wrong
+				
+				if(shop_selection == 4){
+					boolean flourish = true;
+					while(flourish){
+						
+						
+				
+					
+					System.out.println("\nFlourish and Blotts");
+					System.out.println("1. Buy The Standard Book of Spells for 5 Sickles");
+					System.out.println("2. Buy A History of Magic for 3 Sickles and 12 Knuts");
+					System.out.println("3. Buy Magical Drafts and Potions for 27 Knuts");
+					System.out.println("4. Exit");
+					
+					
+					System.out.print("\nSelection: ");
+					int book_selection = console.nextInt();
+					
+					if(book_selection > 4 || book_selection < 1){
+						System.out.println("\nInvalid entry!");
+					}//book selection invalid entry
+					if(book_selection == 1 && hasBookofSpells == true && enoughMoney(galleon, sickle, knut, cost_bookofspells)==true){
+						System.out.println("\nTransaction successful! ");
+						hasBookofSpells = false;
+						hasNothing = false;
+						sickle = sickle - 5;
+						if(sickle <0){
+							galleon = galleon -1;
+							sickle = sickle + 17;
+						}
+						//here
+						}//flourish and blotts transaction book of spells
+					else if(book_selection == 1 && hasBookofSpells == false){
+						System.out.println("\nTransaction failed! ");
+						System.out.println("You already have this! ");
+					}//transaction failed book of spells
+					if(book_selection == 1 && enoughMoney(galleon, sickle, knut, cost_bookofspells) == false){
+						System.out.println("\nTransaction failed! ");
+						System.out.println("You don't have enough money! ");
+					}
+					if(book_selection == 4){
+						flourish = false;
+					}
+					if(book_selection == 2 && hasHistoryofMagic == true && enoughMoney(galleon, sickle, knut, cost_historyofmagic)== true){
+						System.out.println("\nTransaction successful!");
+						hasHistoryofMagic = false;
+						hasNothing = false;
+						sickle = sickle - 3;
+						knut = knut - 12;
+						if(sickle < 0){
+							galleon = galleon -1;
+							sickle = sickle + 17;
+						}
+						if(knut < 0){
+							sickle = sickle -1;
+							knut = knut + 29;
+						}
+					}// A History of Magic
+					else if(book_selection == 2 && hasHistoryofMagic == false){
+						System.out.println("\nTransaction failed! ");
+						System.out.println("You already have this! ");
+					}// A History of Magic Transaction Failed
+					if(book_selection == 2 && enoughMoney(galleon, sickle, knut, cost_historyofmagic) == false){
+						System.out.println("\nTransaction failed! ");
+						System.out.println("You do not have enough money! ");
+					}
+					if(book_selection == 3 && hasDraftsandPotions == true && enoughMoney(galleon, sickle, knut, cost_draftsandpotions)== true){
+						System.out.println("\nTransaction successful!");
+						hasDraftsandPotions = false;
+						hasNothing = false;
+						knut = knut -27;
+						if(knut < 0){
+							sickle = sickle -1;
+							knut = knut + 29;
+						}
+					}// Magical Drafts and Potions
+					else if(book_selection == 3 && hasDraftsandPotions == false){
+						System.out.println("\nTransaction failed! ");
+						System.out.println("You already have this! ");
+					}//Magical Drafts and Potions transaction failed
+					if(book_selection == 3 && enoughMoney(galleon, sickle, knut, cost_draftsandpotions)== false){
+						System.out.println("\nTransaction failed!");
+						System.out.println("You do not have enough money! ");
+					}
+					if(book_selection == 4){
+						firstselection = true;
+						main = false;
+					}//loop book selection
+				}//while flourish
+				}//flourish and blotts selection
+				
+				if(shop_selection == 5){
+					boolean potage = true;
+					while(potage){
+					System.out.println("\nPotage's Cauldron Shop");
+					System.out.println("1. Buy Cauldron for 10 Sickles");
+					System.out.println("2. Exit");
+					
+					System.out.print("\nSelection: ");
+					int potage_selection = console.nextInt();
+					
+					if(potage_selection > 2 || potage_selection < 1){
+						System.out.println("\nInvalid entry!");
+					}//potage selection invalid entry
+					if(potage_selection == 1 && hasCauldron == true && enoughMoney(galleon, sickle, knut, cost_cauldron) == true){
+						hasCauldron = false;
+						hasNothing = false;
+						sickle = sickle - 10;
+						if(sickle < 0){
+							galleon = galleon -1;
+							sickle = sickle + 17;
+						}
+						System.out.println("\nTransaction successful! ");
+						//here
+					}
+					else if(potage_selection == 1 && hasCauldron == false){
+						System.out.println("\nTransaction failed! ");
+						System.out.println("You already have this! ");
+					}//Cauldron transaction failed
+					else if(potage_selection == 1 && enoughMoney(galleon, sickle, knut, cost_cauldron)== false){
+						System.out.println("\nTransaction failed! ");
+						System.out.println("You do not have enough money! ");
+					}
+					if(potage_selection == 2){
+						potage = false;
+					}
+					
+				}//while potage loop
+				}//potage selection
+				
+				if(shop_selection == 6){
+					main = true;
+					firstselection = false;
+				}//exit shop selection
+				
+		}//end if statement shop selection
+		
+		
+		
+		if(first_selection == 4){
+			if(!hasBroom && !hasRobes && !hasWand && !hasBookofSpells && !hasHistoryofMagic && !hasDraftsandPotions && !hasCauldron && !hasNothing){
+				System.out.println("\nHave a nice day!! ");
+			}
+			else{
+				if(hasBroom && hasRobes && hasWand && hasBookofSpells && hasHistoryofMagic && hasDraftsandPotions && hasCauldron && hasNothing){
+				System.out.println("\nYou have no supplies!");
+			}
+			
+			else{
+				if(hasBroom || hasRobes || hasWand || hasBookofSpells || hasHistoryofMagic || hasDraftsandPotions || hasCauldron || hasNothing){
+					System.out.println("\nYou are missing some items!");
+					System.out.println("Missing: ");
+				if(hasBroom){
+					System.out.println("Broom");
+				}
+					if(hasRobes){
+						System.out.println("School robes");
+					}
+						if(hasWand){
+							System.out.println("Wand");
+						}
+							if(hasBookofSpells){
+								System.out.println("The Standard Book of Spells");
+							}
+								if(hasHistoryofMagic){
+									System.out.println("A History of Magic");
+								}
+									if(hasDraftsandPotions){
+										System.out.println("Magical Drafts and Potions");
+									}
+										if(hasCauldron){
+											System.out.println("Cauldron");
+										}
+			}// if statement you are missing items
+			}//second else statement
+			}//else statement you have no supplies
+			
+			
+			
+			
+			
+						
+			
+			
+			main = false;
+			firstselection = false;
+		}//first selection leaving choice 4
+		}//while first selection
+		}//while main
+	
+		
+		}//main method
+		
+		
+	
+
+	}//public class
+		
+
+
+	
+	
+
+
+
+	
+		
+							
+						
+		
+				
+			
+	
+
+	
+
+
+
+	
+		
+
+
+
+
+		
+		
+
+
+
+
