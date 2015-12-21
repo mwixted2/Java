@@ -1,0 +1,136 @@
+import java.io.File;
+import java.util.Scanner;
+public class TextThreatAssessment {
+	public static void main(String[] args) {
+		Scanner console = new Scanner(System.in);
+		
+		Boolean loop = true;
+		
+		while(loop == true){
+		
+        //this used to just be a do-while loop
+		
+		
+		System.out.print("Enter the UFID of the person who wrote the message:");
+		String ufid = console.next();
+		
+		
+		
+	    
+	    
+		Boolean continuerunning = true;
+	   //System.out.println(ufid.length());
+	    if(ufid.substring(0,1).equals("0")){
+            //this used to say if(ufid.equals(0))
+	    	continuerunning = false;
+            //added this
+	    	
+			System.out.println("Error: UFID must not begin with a zero. Now Exiting. ");
+			break;
+            //added this
+			
+		}
+		
+	    if(ufid.length() != 8){
+	    continuerunning = false;
+	    System.out.println("Error: UFID must be 8 digits. Now Exiting. ");
+	    break;
+            
+            //added all of this
+	   
+	    }
+		
+	    
+		//System.out.println(continuerunning);
+	    if(continuerunning){
+            //added this
+	    System.out.println("Opening file: " + ufid + ".txt ");
+		System.out.print("Enter the word (or phrase) of interest: ");
+		
+		
+		
+
+		
+		String word;
+		word = console.next();
+		
+		
+		String encryptedString = "";
+			try
+			{
+			 File file = new File (ufid + ".txt");
+			 Scanner sc = new Scanner(file);
+			 while (sc.hasNextLine())
+			 {
+				 encryptedString+=sc.nextLine();
+			 }
+			 sc.close();
+		} catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+	
+		String s2 = "";
+		for(int i = 1; i<encryptedString.length(); i++ )
+			if(i % 2 == 1)
+				s2 = encryptedString.charAt(i)+ s2;
+		
+		
+		int lastIndex = 0;
+		int count = 0;
+		
+				
+		
+		while (lastIndex != -1){
+			
+			lastIndex = s2.indexOf(word, lastIndex);
+			
+			if( lastIndex != -1){
+				count ++;
+				lastIndex += word.length();
+			}
+		}
+		
+	
+		
+			
+		System.out.println("The word " + word + " was found " + count + " time(s). ");	
+	
+	
+		if(count >=4){
+			System.out.println("Messages from student " + ufid + " were foundt to be: Highly Threatening ");
+		}
+	
+		if(count >=3){
+			System.out.println("Messages from student " + ufid + " were found to be: Threatening ");
+		
+		}
+	
+		if(count >=2){
+			System.out.println("Messages from student " + ufid + " were found to be: Somewhat Threatening ");
+		
+		}
+	
+		else{
+			System.out.println("Messages from student " + ufid + " were found to be: Safe ");
+		}
+	
+
+		System.out.print("Press (y) to continue or (n) to exit.");
+		
+		String choice = console.next();
+		if(choice.equals("n")){
+			loop = false;
+            //this used to be while(!"choice".equals("y"));
+		}
+		
+	  }
+		}
+		
+	}
+}
+
+		
+	
+
+	
